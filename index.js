@@ -4,6 +4,8 @@ var port =12345;
 
 net.createServer(function(socket){
   console.log('Connected: ' + socket.remoteAddress + ' : ' + socket.remotePort);
+  socket.write('nihao');
+
 
   socket.on('data',function(data){
     console.log('DATA' + socket.remoteAddress + ' : ' + data);
