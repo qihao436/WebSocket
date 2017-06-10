@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>socket test</title>
+  </head>
+  <body>
+      <ol id ="qihaotest">
+
+      </ol>
+  <script type="text/javascript">
+      var socket = new WebSocket('ws://qihao.mynetgear.com:12345');
+      socket.onopen = function(e){
+        socket.send('nihao');
+        console.log('hjasdhf');
+      }
+  </script>
+  </body>
+</html>
