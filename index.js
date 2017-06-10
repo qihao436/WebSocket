@@ -2,7 +2,7 @@ var http = require('http');
 var fs =require('fs');
 
 http.createServer(function(req,res){
-	fs.readFileSync('.\asdf.html').pipe(req);
+	fs.readFileSync('asdf.html').pipe(req);
 
 }).listen(8080);
 
