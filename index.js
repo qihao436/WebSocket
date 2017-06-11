@@ -1,29 +1,25 @@
-var http = require('http');
-var fs =require('fs');
+var WebSocket = require('ws');
+var WebSocketServer = WebSocket.Server;
+var port = 3001;
 
-http.createServer(function(req,res){
-	req.end(fs.readFileSync('asdf.html'));
+var ws = new WebSocketServer({
+    port: port
+});
 
-}).listen(8080);
+var messages = [];
+console.log('websockets server started');
 
+ws.on('connection', function(socket) {
+    console.log('client connection established');
+    messages.forEach(function(msg) {
+        socket.send(msg);
+    });
 
-var net = require('net');
-
-var port =12345;
-
-net.createServer(function(socket){
-  console.log('Connected: ' + socket.remoteAddress + ' : ' + socket.remotePort);
-
-
-
-  socket.on('data',function(data){
-
-      socket.write('nihao');
-  });
-
-  socket.on('close',function(data){
-      console.log('CLOSED' + socket.remoteAddress + ' : ' + data);
-  });
-}).listen(port);
-
-console.log('listening on: ' +port);
+    socket.on('message', function(data) {
+        console.log('message received: ' + data);
+        messages.push(data);
+        ws.clients.forEach(function(clientSocket) {
+            clientSocket.send(data);
+        });
+    });
+});
