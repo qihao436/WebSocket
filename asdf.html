@@ -10,9 +10,8 @@
       </ol>
   <script type="text/javascript">
       var socket = new WebSocket('ws://qihao.mynetgear.com:12345');
-      socket.onopen = function(e){
-        socket.send('nihao');
-        console.log('hjasdhf');
+      socket.onmessage = function(e){
+          console.log('server said' + e.data);
       }
   </script>
   </body>
