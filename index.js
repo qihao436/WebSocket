@@ -1,6 +1,17 @@
+var http = require('http');
+var fs =require('fs');
+
+http.createServer(function(req,res){
+        res.end(fs.readFileSync('asdf.html'));
+
+}).listen(8080);
+
+
+
+
 var WebSocket = require('ws');
 var WebSocketServer = WebSocket.Server;
-var port = 3001;
+var port = 12345;
 
 var ws = new WebSocketServer({
     port: port
@@ -8,6 +19,8 @@ var ws = new WebSocketServer({
 
 var messages = [];
 console.log('websockets server started');
+
+
 
 ws.on('connection', function(socket) {
     console.log('client connection established');
